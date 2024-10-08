@@ -6,6 +6,7 @@ outimg = zeros(rows, columns, channels, 'uint8');
 n = rows*columns;
 counts = zeros(channels,256);
 
+% menghitung banyak pixel
 for i = 1:rows
     for j = 1:columns
         for c = 1:channels
@@ -15,10 +16,11 @@ for i = 1:rows
     end
 end
 
-cdf = counts/n;
-cdf = cumsum(cdf,2);
-map = round(cdf*255);
+cdf = counts/n; % normalisasi
+cdf = cumsum(cdf,2); % hitung array kumulatif
+map = round(cdf*255); % normalisasi kembali ke domain awal
 
+% mapping hasil intentitas pixel yang baru
 for i = 1:rows
     for j = 1:columns
         for c = 1:channels
